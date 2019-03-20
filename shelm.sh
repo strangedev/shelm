@@ -54,7 +54,7 @@ add_identity()
 	keyOrCertFullPath=$1
 	caCertFullPath=$2
 	keyOrCertName="$(basename $keyOrCertFullPath)"
-	directory="$(dirname keyOrCertFullPath)"
+	directory="$(dirname $keyOrCertFullPath)"
 	myId="${keyOrCertName%.*}"
 
 	if [ -d "${CONFIG_DIRECTORY}/${myId}" ]; then
