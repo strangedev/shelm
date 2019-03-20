@@ -127,11 +127,14 @@ do_the_helm()
 	caCert=$(get_identity_ca_cert "${identity}")
 	clientCert=$(get_identity_cert "${identity}")
 	clientKey=$(get_identity_key "${identity}")
-	echo helm $@ --tls \
+	helm $@ \
+		--tls \
 		--tls-ca-cert "$caCert" \
 		--tls-cert "${clientCert}" \
 		--tls-key "${clientKey}"
 }
+
+ensure_config_directory_exists
 
 case $1 in 
 	identity)
@@ -157,6 +160,10 @@ case $1 in
 			exit 1
 			;;
 		esac
+	;;
+	"")
+		echo "Please provide a command. Please refer to https://github.com/strangedev/shelm"
+		exit 1
 	;;
 	* )
 		do_the_helm $@
